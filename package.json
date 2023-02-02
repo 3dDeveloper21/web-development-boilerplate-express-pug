@@ -4,9 +4,11 @@
   "description": "boiler plater for freelance web projects",
   "main": "index.js",
   "scripts": {
-    "start": "npm run development",
-    "development": "webpack serve --progress --config webpack.development.config.js",
-    "build": "webpack --progress --config webpack.build.config.js"
+    "backend:build": "nodemon app.js",
+    "backend:development": "nodemon app.js",
+    "frontend:build": "webpack --progress --config webpack.build.config.js",
+    "frontend:development": "webpack serve --progress --config webpack.development.config.js",
+    "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
   },
   "keywords": [
     "webpack"
@@ -14,6 +16,11 @@
   "author": "Harpreet",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.20.2",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
@@ -25,6 +32,7 @@
     "mini-css-extract-plugin": "^2.7.2",
     "node-sass": "^8.0.0",
     "postcss-loader": "^7.0.2",
+    "pug": "^3.0.2",
     "raw-loader": "^4.0.2",
     "sass-loader": "^13.2.0",
     "terser-webpack-plugin": "^5.3.6",
@@ -32,5 +40,8 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }

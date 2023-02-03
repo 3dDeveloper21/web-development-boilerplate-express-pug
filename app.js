@@ -50,10 +50,22 @@ app.use((req, res, next) => {
 // Query for the root path.
 app.get('/', async (req, res) => {
   // Here we are retrieving the first document from your API endpoint
-  const document = await client.getSingle('home')
-  res.render('pages/home', { document: document })
+  await client.getSingle('about').then(response => {
+    const { data } = response;
+    console.log(data)
+    res.render('pages/home', { document: data })
+  })
+  
 
-  console.log(document)
+  // console.log(document.data)
+})
+
+app.get('/about', async (req, res) => {
+  // Here we are retrieving the first document from your API endpoint
+  const document = await client.getSingle('about')
+  res.render('pages/about', { document: document.data })
+
+  // console.log(document.data)
 })
 
 app.listen(port, () => {
